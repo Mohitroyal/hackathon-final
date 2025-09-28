@@ -68,15 +68,15 @@ const App: React.FC<Record<string, never>> = (): React.ReactElement => {
       <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 text-gray-800 font-sans p-4 sm:p-6 lg:p-8">
         <main className="max-w-7xl mx-auto">
           <Routes>
-            <Route path="/" element={<Navigate to="/login" />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/dashboard" element={
+            <Route path="/" element={<Navigate to="login" />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="dashboard" element={
               <div key={currentView} className="animate-fade-in-up">
                 {renderView()}
               </div>
             } />
-            <Route path="*" element={<Navigate to="/hackathon-final/login" />} />
+            <Route path="*" element={<Navigate to="login" />} />
           </Routes>
         </main>
       </div>
