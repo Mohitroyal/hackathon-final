@@ -62,7 +62,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <Router>
+    <Router basename="/hackathon-final">
       <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 text-gray-800 font-sans p-4 sm:p-6 lg:p-8">
         <main className="max-w-7xl mx-auto">
           <Routes>
