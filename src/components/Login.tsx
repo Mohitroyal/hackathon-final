@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../src/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
 
-const Signup: React.FC = () => {
+const Login: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -16,25 +15,20 @@ const Signup: React.FC = () => {
     setError('');
     setSuccess('');
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      setSuccess('Account created successfully!');
+      await signInWithEmailAndPassword(auth, email, password);
+      setSuccess('Login successful!');
       setTimeout(() => {
         navigate('/dashboard');
       }, 1500);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred during signup');
+      setError(err instanceof Error ? err.message : 'An error occurred during login');
     }
   };
 
   return (
     <div className="auth-container">
-      <h2>Sign Up</h2>
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         {error && <div className="error-message">{error}</div>}
         {success && <div className="success-message">{success}</div>}
@@ -61,27 +55,16 @@ const Signup: React.FC = () => {
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
-
-        <button type="submit">Sign Up</button>
+        <button type="submit">Login</button>
       </form>
       <p className="text-center mt-4">
-        Already have an account?{' '}
-        <a href="/login" className="text-green-600 hover:text-green-800">
-          Login here
+        Don't have an account?{' '}
+        <a href="#/signup" className="text-green-600 hover:text-green-800">
+          Create new account
         </a>
       </p>
     </div>
   );
 };
 
-export default Signup;
+export default Login;
