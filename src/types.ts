@@ -39,3 +39,8 @@ export enum MissionStage {
     QUIZ = 'QUIZ',
     GAME = 'GAME',
 }
+
+export interface LeaderboardData {
+    name: string;
+    points: number;
+}
